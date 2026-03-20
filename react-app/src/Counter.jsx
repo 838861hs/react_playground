@@ -1,22 +1,38 @@
-import { useState } from "react";
+import { use, useState } from "react";
 
-function Counter () {
-  const [count,setCounter] = useState(0);
-  const handleIncrease = ()=> {
-    setCounter(prev => prev + 1)
+function Counter() {
+  const [count,setCount] = useState(0);
+  
+  function increment() {
+    setCount(count + 1)
   }
-  const handleDecrease = () => {
-    setCounter(prev => Math.max(prev - 1,0))
+  function decrement() {
+    if(count > 0){
+      setCount(count - 1);
+    }
   }
-  const reset = () => {
-    setCounter(0)
+  function reset() {
+    setCount(0)
   }
+  function save() {
+    localStorage.setItem(count, {count})
+    alert('セーブしました！')
+  }
+  function load() {
+    const savedValue = localStorage.getItem("count")
+    console.log(savedValue);
+    setCount(savedValue)
+  }
+
   return (
     <>
       <p>{count}</p>
-      <button onClick={handleIncrease}>+</button>
-      <button onClick={handleDecrease}>-</button>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement} disabled={count === 0} >-</button>
       <button onClick={reset}>reset</button>
+      <button onClick={save}>save</button>
+      <button onClick={load}>load</button>
+
     </>
   )
 }
