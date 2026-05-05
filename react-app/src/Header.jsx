@@ -1,0 +1,18 @@
+import './scss/header.scss'
+
+export default function Header() {
+  return (
+    <header >
+      <h1 className='header'>header</h1>
+      <nav>
+      <ul>
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+        <li>item 4</li>
+      </ul>
+      </nav>
+    </header>
+  )
+}
+

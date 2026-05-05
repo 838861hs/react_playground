@@ -1,38 +1,22 @@
 import { use, useState } from "react";
 
 function Counter() {
-  const [count,setCount] = useState(0);
+  const [text,setText] = useState("");
   
-  function increment() {
-    setCount(count + 1)
+  const getColor = ()=> {
+    if(text.length > 20 ) return 'red';
+    if(text.length > 10 ) return "white";
+    return "green";
   }
-  function decrement() {
-    if(count > 0){
-      setCount(count - 1);
-    }
-  }
-  function reset() {
-    setCount(0)
-  }
-  function save() {
-    localStorage.setItem(count, {count})
-    alert('セーブしました！')
-  }
-  function load() {
-    const savedValue = localStorage.getItem("count")
-    console.log(savedValue);
-    setCount(savedValue)
-  }
+
 
   return (
     <>
-      <p>{count}</p>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement} disabled={count === 0} >-</button>
-      <button onClick={reset}>reset</button>
-      <button onClick={save}>save</button>
-      <button onClick={load}>load</button>
-
+      <input 
+        value={text}
+       onChange={(e)=> setText(e.target.value)}  
+      />
+    <p style={{ color:getColor() }}>文字数: {text.length}</p>
     </>
   )
 }
